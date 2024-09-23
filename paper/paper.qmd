@@ -4,7 +4,7 @@ subtitle: STA304 Paper 1 Submission
 author: 
   - Veyasan Ragulan
   - Another author
-thanks: "Code and data are available at: LINK."
+thanks: "Code and data are available at: https://github.com/Veyasan1/STA3014-Paper1"
 date: today
 date-format: long
 abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
@@ -25,36 +25,16 @@ library(palmerpenguins)
 
 # Introduction
 
-You can and should cross-reference sections and sub-sections. We use @citeR and @rohan.
-
-The remainder of this paper is structured as follows. @sec-data....
-
-
+Urban spaces are often void of nature, whether it be grass fields, blooming flowers, or teaming and diverse natural wildlife. One simple way to tackle this is to incorporate nature within the urban landscape, such as with trees. Trees are a vital plant in the world, they take in carbon dioxide and provide oxygen, a key component in the air we breath. Urban areas are known for the excess in carbon dioxide, which only makes it seem natural that trees can live and perhaps thrive in such environments. Trees can also alter the way wind affects pedestrians below (@beptree). It should be no suprise then, that many cities around the world, including Toronto, have incorporated trees into their landscape, in busy downtown centres, to sleepy suburbs, and everywhere in between.
 
 # Data {#sec-data}
 
-Some of our data is of penguins (@fig-bills), from @palmerpenguins.
-
-```{r}
-#| label: fig-bills
-#| fig-cap: Bills of penguins
-#| echo: false
-
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = "none") +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
-```
-
-Talk more about it.
+The data comes from OpedData Toronto, an open source portal containng datasets carried out at the municipal level (@opendata). This particular dataset is called Street Tree Data, and focuses on city-owned trees located on roads. This information would be most likely used by city planners and road maintenance, ensuring snow plows and street dusters don't impede on any trees that line the roads. It is important to not that there may be some privately owned trees listed among the municipal trees, as they may be of interest with regards to road maintenance or other city services.
 
 And also planes (@fig-planes). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.)
 
 ```{r}
-#| label: fig-planes
+#| label: fig-topspecies
 #| fig-cap: Relationship between wing length and width
 #| echo: false
 #| warning: false
@@ -62,53 +42,84 @@ And also planes (@fig-planes). (You can change the height and width, but don't w
 
 analysis_data <- read_csv(here::here("data/analysis_data/analysis_data.csv"))
 
-analysis_data |> 
-  ggplot(mapping = aes(x = botanical_name)) +
-  geom_bar() +
+top_species_count <- analysis_data %>%
+  count(botanical_name, sort = TRUE) %>%
+  head(10)
+
+top_species_count |> 
+  ggplot(aes(y = botanical_name, x = n)) +
+  geom_col() +
   theme_minimal() +
-  labs(x = "Tree species",
+  labs(x = "Planted Trees",
+       y = NULL)
+```
+Talk way more about it. 
+
+```{r}
+#| label: fig-ward
+#| fig-cap: Relationship between wing length and width
+#| echo: false
+#| warning: false
+#| message: false
+
+analysis_data <- read_csv(here::here("data/analysis_data/analysis_data.csv"))
+
+ward_count <- analysis_data %>%
+  count(ward, sort = TRUE) %>%
+  head(10)
+
+ward_count |> 
+  ggplot(aes(x = ward, y = n)) +
+  geom_col() +
+  theme_minimal() +
+  labs(x = "Ward",
        y = "Number of trees planted")
 ```
 
-Talk way more about it. 
+```{r}
+#| label: fig-speciesward
+#| fig-cap: Relationship between wing length and width
+#| echo: false
+#| warning: false
+#| message: false
+
+analysis_data <- read_csv(here::here("data/analysis_data/analysis_data.csv"))
 
 
 
-# Model
+top_species_ward_count <- analysis_data %>%
+  filter(botanical_name == "Acer platanoides") %>%
+  count(ward, sort = TRUE) %>%
+  head(10)
 
-The goal of our modelling strategy is twofold. Firstly,...
+top_species_ward_count |> 
+  ggplot(aes(x = ward, y = n)) +
+  geom_col() +
+  theme_minimal() +
+  labs(x = "Ward",
+       y = "Number of trees planted")
+```
+```{r}
+#| label: fig-trunk
+#| fig-cap: Relationship between wing length and width
+#| echo: false
+#| warning: false
+#| message: false
 
-Here we briefly describe the Bayesian analysis model used to investigate... Background details and diagnostics are included in [Appendix -@sec-model-details].
+analysis_data <- read_csv(here::here("data/analysis_data/analysis_data.csv"))
 
-## Model set-up
+max_dbh <- analysis_data %>%
+  filter(dbh_trunk == 815)
 
-Define $y_i$ as the number of seconds that the plane remained aloft. Then $\beta_i$ is the wing width and $\gamma_i$ is the wing length, both measured in millimeters.  
+max_dbh
 
-\begin{align} 
-y_i|\mu_i, \sigma &\sim \mbox{Normal}(\mu_i, \sigma) \\
-\mu_i &= \alpha + \beta_i + \gamma_i\\
-\alpha &\sim \mbox{Normal}(0, 2.5) \\
-\beta &\sim \mbox{Normal}(0, 2.5) \\
-\gamma &\sim \mbox{Normal}(0, 2.5) \\
-\sigma &\sim \mbox{Exponential}(1)
-\end{align}
-
-We run the model in R [@citeR] using the `rstanarm` package of @rstanarm. We use the default priors from `rstanarm`.
-
-
-### Model justification
-
-We expect a positive relationship between the size of the wings and time spent aloft. In particular...
-
-We can use maths by including latex between dollar signs, for instance $\theta$.
-
-
-# Results
-
-Our results are summarized in @tbl-modelresults.
-
-
-
+analysis_data |> 
+  ggplot(mapping = aes(x = dbh_trunk)) +
+  geom_histogram() +
+  theme_minimal() +
+  labs(x = "DBH Diameter",
+       y = "Tree Count")
+```
 
 # Discussion
 
