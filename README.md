@@ -1,4 +1,4 @@
-# An abundance of invasive trees in Toronto and a lack of trees in the streets of Toronto’s core
+# Street Trees
 
 ## Overview
 
