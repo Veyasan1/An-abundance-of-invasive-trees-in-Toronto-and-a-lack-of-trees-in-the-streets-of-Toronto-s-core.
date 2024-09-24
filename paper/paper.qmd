@@ -1,13 +1,12 @@
 ---
-title: "My title"
+title: "An abundance of invasive trees in Toronto and a lack of trees in the streets of Toronto's core. "
 subtitle: STA304 Paper 1 Submission
 author: 
   - Veyasan Ragulan
-  - Another author
 thanks: "Code and data are available at: https://github.com/Veyasan1/STA3014-Paper1"
 date: today
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "Tree- lined streets are an exceptional way to add nature to urban envirnoments. Using the Street Tree data from OpenData Toronto, this paper examines the patterns and trends in Toronto's street trees. Tree species count, count of trees by ward, and distribution of tree-diameters were analysed. Uncovered was a abundance of a non-native tree species, and a lack of trees on the streets of Toronto's core"
 format: pdf
 number-sections: true
 bibliography: references.bib
@@ -19,32 +18,39 @@ bibliography: references.bib
 #| message: false
 
 library(tidyverse)
-library(palmerpenguins)
 ```
 
 
 # Introduction
 
-Urban spaces are often void of nature, whether it be grass fields, blooming flowers, or teaming and diverse natural wildlife. One simple way to tackle this is to incorporate nature within the urban landscape, such as with trees. Trees are a vital plant in the world, they take in carbon dioxide and provide oxygen, a key component in the air we breath. Urban areas are known for the excess in carbon dioxide, which only makes it seem natural that trees can live and perhaps thrive in such environments. Trees can also alter the way wind affects pedestrians below (@beptree). It should be no suprise then, that many cities around the world, including Toronto, have incorporated trees into their landscape, in busy downtown centres, to sleepy suburbs, and everywhere in between.
+Urban spaces can be void of vast expanses of nature, whether it be grass fields, blooming flowers, or teaming and diverse natural wildlife. One simple way to tackle this is to incorporate nature within the urban landscape, such as with trees. Trees are a vital plant in the world, they take in carbon dioxide and provide oxygen, a key component in the air we breath. Urban areas are known for the excess in carbon dioxide, which only makes it seem natural that trees can live and perhaps thrive in such environments. One way cities have incorportated trees into the city are roadside trees. Trees line many of the cities highways, arterials, collectors, and small roads. Lines of trees lined alongside highways can act as a natural sound barrier by reflecting, scattering and absoring nearby noises (@aais). Tree-lined streets can also alter the way wind affects pedestrians below them, creating a more hospitable enviroment to promote active transportation such as walking or biking (@beptree). It should be no suprise then, that many cities around the world, including Toronto, have incorporated trees into their landscape, in busy downtown centres, to sleepy suburbs, and everywhere in between.
 
-One way cities have incorportated trees into the city are roadside trees. Trees line many of the cities highways, arterials, collectors, and small roads. Large quantaties of trees lined against highways can act as a natural sound barrier, INSERT STATISTIC WITH SORUCE HERE. Even in cases where trees are more sporadic, they act as 
+In this paper we look at street tree data from Toronto's roadside trees, and discern any patterns or observations to suggest further investigation. We first look at the most populous tree species in Toronto, an the ward with the most trees. We will also look at tree diameter, which can indicate the approximate age of trees in the city, and look for anomalies and interesting summaries there. Finally we look at the least popoulous tree species and figure out where Toronto's native trees stack up.
+
+Section 2 will outline the source of this data. Section 3 covers the graphs depicting interesting findings and trends. Section 4 is where discussion will be made about those findings and trends, as well as theories to explain them. Finally, section 4 discusses any weakness and limitations that can be considered for another report.
 
 # Data {#sec-data}
 
-The data comes from OpenData Toronto, an open source portal containng datasets carried out at the municipal level (@opendata). This particular dataset is called Street Tree Data, and focuses on city-owned trees located on roads. This information would be most likely used by city planners and road maintenance, ensuring snow plows and street dusters don't impede on any trees that line the roads. It is important to note that there may be some privately owned trees listed among the municipal trees, as they may be of interest with regards to road maintenance or other city services.
+The data comes from OpenData Toronto, an open source portal containing datasets carried out at the municipal level (@opendata). This particular dataset is called Street Tree Data, and focuses on city-owned trees located on roads. This information would be most likely used by city planners and road maintenance, ensuring snow plows and street dusters don't impede on any trees that line the roads. It is important to note that there may be some privately owned trees listed among the municipal trees, as they may be of interest with regards to road maintenance or other city services.
 
 Street Tree Data contains around 32000 observations, each observation being an individual tree. Each observation has a general id for data analysis, as well as an structure id, telling us if the tree is part of an existing structure or building. Next is the location of the tree, using the nearest parcel delivery address, nearest cross-junction, and which ward it is located in. Street Tree contains both the botanical name and the common english name, however we have decided to use only the botanical name to avoid confusion between similar sounding trees. Common english names will be provided for species of key interest. Finally, there is a measurement called dbh_trunk. This is a standard method for measuring the diameter of a tree. The method asks record takeres to read the circumference of the tree from 1.3m off the ground it is rooted in. This measurement has been known to be vaguage, especially when it comes to wawrped or tipping trees, making the exact measurements made on each tree inaccurate at best. 
 
-And also planes (@fig-planes). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.)
-
+# Results
 ```{r}
-#| label: fig-topspecies
-#| fig-cap: Relationship between wing length and width
 #| echo: false
 #| warning: false
 #| message: false
 
 analysis_data <- read_csv(here::here("data/analysis_data/analysis_data.csv"))
+```
+
+
+```{r}
+#| label: fig-topspecies
+#| fig-cap: Street tree count of 10 most popoulus tree species in Toronto up to September 2024
+#| echo: false
+#| warning: false
+#| message: false
 
 top_species_count <- analysis_data %>%
   count(botanical_name, sort = TRUE) %>%
@@ -57,20 +63,18 @@ top_species_count |>
   labs(x = "Planted Trees",
        y = NULL)
 ```
-Talk way more about it. 
+
+The most populous species by far is the Acer platanoides, commonly known as the Norwegian Maple. It is interesting how much more prevalent it is compared to any of the other top 10 tree species, at over 3000 recorded individuals.
 
 ```{r}
 #| label: fig-ward
-#| fig-cap: Relationship between wing length and width
+#| fig-cap: Street tree count by Toronto wards up to September 2024
 #| echo: false
 #| warning: false
 #| message: false
 
-analysis_data <- read_csv(here::here("data/analysis_data/analysis_data.csv"))
-
 ward_count <- analysis_data %>%
-  count(ward, sort = TRUE) %>%
-  head(10)
+  count(ward, sort = TRUE)
 
 ward_count |> 
   ggplot(aes(x = ward, y = n)) +
@@ -79,79 +83,42 @@ ward_count |>
   labs(x = "Ward",
        y = "Number of trees planted")
 ```
+Ward 2 takes the top spot for tree count, with Ward 3 trailing behind it. These wards are both in Toronto's west end, Etobicoke Centre, and Etobicoke- Lakeshore.Ward 13 and Ward 10 have the least amount of trees, being Spadina-Fort York and Toronto Centre.
 
-```{r}
-#| label: fig-speciesward
-#| fig-cap: Relationship between wing length and width
-#| echo: false
-#| warning: false
-#| message: false
-
-analysis_data <- read_csv(here::here("data/analysis_data/analysis_data.csv"))
-
-
-
-top_species_ward_count <- analysis_data %>%
-  filter(botanical_name == "Acer platanoides") %>%
-  count(ward, sort = TRUE) %>%
-  head(10)
-
-top_species_ward_count |> 
-  ggplot(aes(x = ward, y = n)) +
-  geom_col() +
-  theme_minimal() +
-  labs(x = "Ward",
-       y = "Number of trees planted")
-```
 ```{r}
 #| label: fig-trunk
-#| fig-cap: Relationship between wing length and width
+#| fig-cap: Distribution of Distance-at-Breast-Height diameter of all trees in Toronto up to September 2024
 #| echo: false
 #| warning: false
 #| message: false
 
-analysis_data <- read_csv(here::here("data/analysis_data/analysis_data.csv"))
-
-max_dbh <- analysis_data %>%
-  filter(dbh_trunk == 815)
-
-max_dbh
-
 analysis_data |> 
-  ggplot(mapping = aes(x = dbh_trunk)) +
-  geom_histogram() +
+  ggplot(aes(x = dbh_trunk)) +
+  geom_histogram(binwidth = 10) +
   theme_minimal() +
   labs(x = "DBH Diameter",
        y = "Tree Count")
 ```
+The histogram has a very long tail to the left, indicating one or two trees having upwards of 815 cm of diameter.
 
 # Discussion
 
-## First discussion point {#sec-first-point}
+## The worrying prominence of Acer platanoides
 
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
+Figure 1 shows that Acer platanoides, otherwise known as the Norway Maple, is clearly the most populous tree in the city of Toronto, beating out any of 9 other contenders by 200 individuals. Acer platanoides is a well known tree used in urban environments, especially after the demise of elm trees in the 1970s (@urbanforest). These trees are know for ‘a vigorous early growth rate, desirable form and size, the capacity to withstand many urban impacts (e.g. pavement, moderate levels of pollution, dusts, and dry soils) and the abilities to transplant well, grow on a wide variety of soils, and withstand ice and snow damage better than other maples’ (@norwaymaple). Being planted in cities, it's seeds can travel by wind across to more wooded suburbs, where the seeds can tolerate shade for extended periods of time (@urbanforest). However, as it's common name suggests, it is not a native species to Canada, instead brought here by European explorers and settlers. While not a very invasive species, taking over just 9% of Southern Ontario's forests, it does so by harming other native plants and trees (@urbanforests). More attention should be cast on the spread of this tree, as it has the potential to devastate Toronto's and SOuthern Ontario's forests in the years to come.
 
-## Second discussion point
+## The supposed lack of trees in downtown Toronto
+Figure 2 shows the distribution of trees across the 25 wards of Toronto. Wards 2 and 3 top the rankings, at over 2000 individuals. This isn't a suprise as those wards are located in Etobicoke Centre and Etobicoke-Lakeshore, consiting mainly of suburbs and small pocjkets of woodland. On the other hand, Wards 10 and 13, Spadina-Fort York, and Toronto Centre, display a shocking lack of trees, at 500 or less. These wards make up a majority of Toronto's downtown core, which would explain the lack of trees. However, this could be a call to invest in more roadside and path side greenery. Implementing more trees either along big avenues such as university, or small roads servicing townhouses and condos, can help liven up what is considered by many to be a dull, drab section of the city, with enless rows of concrete and glass interspersed with concrete and brick and little else.
 
-## Third discussion point
+## DBH diameters
+
+
 
 ## Weaknesses and next steps
 
-Weaknesses and next steps should also be included.
+Street Tree data is cumulative, meaning Urban Forestry has to manually update the status of each tree, which is an arduous task for over 30000 trees. As a result the data may be mismatched, with some trees having only been checked months or even years prior. Another limitation mentioned earlier is the inclusion of some privately-owned trees. There isn't a clear indicator mentioned of who owns the tree in each ovbservation.
 
-\newpage
-
-\appendix
-
-# Appendix {-}
-
-
-# Additional data details
-
-
-
-
-
+Because of the scope of the data harvested, there may be some inacuraccies. For example, Figure 3 is skewed extremely far to the left due to some enourmous numbers. There isn't a clear way of double cheking whther a dbh of 815 was actually recorded and accurate, which makes any conclusions drawn from DBH potentially inaccurate.
 
 \newpage
 
