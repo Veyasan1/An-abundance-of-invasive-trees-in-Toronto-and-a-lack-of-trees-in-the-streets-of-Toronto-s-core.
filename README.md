@@ -1,4 +1,4 @@
-# STA304 Paper 1
+# An abundance of invasive trees in Toronto and a lack of trees in the streets of Toronto’s core
 
 ## Overview
 
