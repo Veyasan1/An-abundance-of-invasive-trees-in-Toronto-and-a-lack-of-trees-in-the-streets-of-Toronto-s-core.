@@ -1,4 +1,4 @@
-# Street Trees
+# Toronto's Street Trees
 
 ## Overview
 
