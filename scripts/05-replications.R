@@ -1,5 +1,5 @@
 #### Preamble ####
-# Purpose: Replicated graphs from... [...UPDATE THIS...]
+# Purpose: Replicated graphs from paper.qmd
 # Author: Veyasan Ragulan
 # Date: 20 September 2024
 # Contact: veyasan.ragulan@mail.utoronto.ca
@@ -10,7 +10,6 @@
 
 #### Workspace setup ####
 library(tidyverse)
-# [...UPDATE THIS...]
 
 #### Load data ####
 analysis_data <- read_csv(here::here("data/analysis_data/analysis_data.csv"))
