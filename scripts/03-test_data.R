@@ -1,5 +1,5 @@
 #### Preamble ####
-# Purpose: Tests the dataset for obvious errors
+# Purpose: Tests the cleaned dataset for any errors
 # Author: Veyasan Ragulan
 # Date: 20 September 2024
 # Contact: veyasan.ragulan@mail.utoronto.ca
@@ -13,12 +13,21 @@ library(tidyverse)
 
 
 #### Test data ####
-data <- read_csv("data/raw_data/simulated.csv")
+data <- read_csv("data/analysis_data/analysis_data.csv")
+
+species_test <- data |>
+  filter(botanical_name == "alix Ã\u0097 sepulcralis")
+species_test
+
+# Does each tree have a corresponding ward
+ward_test <- data |>
+  filter(ward == "None")
+ward_test # Make sure this is a 0*7 tibble
 
 # Test for negative numbers
-data$DBH_TRUNK |> min() <= 0
+data$dbh_trunk |> min() <= 0
 
-# Test for NAs
-all(is.na(data$WARD))
-all(is.na(data$BOTANICAL_NAME))
+# Test for NAs in cleaned_data (should be FALSE)
+all(is.na(data$ward))
+all(is.na(data$botanical_name))
 

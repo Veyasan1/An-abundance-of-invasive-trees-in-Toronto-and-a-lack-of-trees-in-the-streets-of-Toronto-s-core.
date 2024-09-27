@@ -271,7 +271,7 @@ objectid,structid,address,streetname,ward,botanical_name,dbh_trunk
 272,130306,2217,WESTON RD,05,Acer x freemanii (A. rubrum x saccharinum) 'Autumn Blaze',18
 273,188698,28,WILLINGDON AVE,20,Ulmus pumila,64
 274,571501,3131,BRIDLETOWNE CRCL,22,Amelanchier canadensis,8
-275,688881,5555,STEELES AVE E,23,alix Ã sepulcralis,8
+275,688881,5555,STEELES AVE E,23,Salix x sepulcralis,8
 276,433853,50,BERNICE CRES,05,Acer platanoides,80
 277,559049,23,GRANDRAVINE DR,06,Pinus nigra,38
 278,260784,59,MATTICE AVE,02,Quercus alba,4
@@ -3087,7 +3087,7 @@ objectid,structid,address,streetname,ward,botanical_name,dbh_trunk
 3094,37737,143,COMBE AVE,06,Acer platanoides,52
 3095,587219,484,MILLWOOD RD,15,Acer saccharum,4
 3096,217253,6,FIRTHWAY CRT,15,Acer x freemanii (A. rubrum x saccharinum) 'Autumn Blaze',4
-3097,690101,1,CENTRE ISLAND PK,10,alix Ã sepulcralis,8
+3097,690101,1,CENTRE ISLAND PK,10,Salix x sepulcralis,8
 3098,NY147015,59,DROMORE CRES,18,Picea glauca,24
 3099,538701,1,CASSIDY PL,16,Ulmus pumila,6
 3100,SC23532,459,MIDLAND AVE,20,Acer saccharinum,101
@@ -7860,7 +7860,7 @@ objectid,structid,address,streetname,ward,botanical_name,dbh_trunk
 7892,NY141693,48,TIMBERLANE DR,06,Picea pungens,33
 7893,676681,645,CONACHER DR,18,Gleditsia triacanthos f. inermis 'Skyline',8
 7894,220981,479,QUEENS QUAY W,10,Ulmus,8
-7895,688404,60,AUDRELANE CRT,23,alix Ã sepulcralis,8
+7895,688404,60,AUDRELANE CRT,23,Salix x sepulcralis,8
 7896,TO113543,93,DEARBOURNE AVE,14,Acer platanoides 'Emerald Queen',5
 7897,358601,7,CARTIER CRES,21,Acer saccharum 'Green Mountain',4
 7898,NY78345,88,FORTROSE CRES,16,Acer platanoides,60
@@ -11914,7 +11914,7 @@ objectid,structid,address,streetname,ward,botanical_name,dbh_trunk
 11965,TO109661,295,CRANBROOKE AVE,08,Gleditsia triacanthos,55
 11966,89186,36,THICKET RD,02,Picea glauca,35
 11967,304627,2,ARTILLERY ST,23,Acer x freemanii (A. rubrum x saccharinum) 'Autumn Blaze',8
-11968,690096,1,CENTRE ISLAND PK,10,alix Ã sepulcralis,8
+11968,690096,1,CENTRE ISLAND PK,10,Salix x sepulcralis,8
 11969,330172,88,ELM AVE,11,Platanus x acerifolia,4
 11970,TO126301,92,FULTON AVE,14,Acer saccharinum,30
 11971,569852,37,IVY GREEN CRES,24,Quercus rubra,6
@@ -12975,7 +12975,7 @@ objectid,structid,address,streetname,ward,botanical_name,dbh_trunk
 13029,464547,160,HORNER AVE,03,Acer rubrum,7
 13030,TO80082,1,ROSE PARK CRES,11,Syringa reticulata,17
 13031,SC87563,44,SCOTNEY GRV,25,Gleditsia triacanthos f. inermis 'Skyline',40
-13032,650892,7,WYANDOT AVE,10,alix Ã sepulcralis,73
+13032,650892,7,WYANDOT AVE,10,Salix x sepulcralis,73
 13033,239061,42,BERAN DR,24,Quercus rubra,5
 13034,SC4461,14,FULHAM ST,23,Acer saccharinum,83
 13035,536404,11,WILLIAM CARSON CRES,15,Tilia cordata,33
@@ -15676,7 +15676,7 @@ objectid,structid,address,streetname,ward,botanical_name,dbh_trunk
 15742,344887,5,CHEVIOT PL,02,Acer saccharum,40
 15743,SC52614,352,AYLESWORTH AVE,20,Pyrus,21
 15744,451570,2,CALSTOCK DR,01,Acer nigrum,4
-15745,690081,1,CENTRE ISLAND PK,10,alix Ã sepulcralis,8
+15745,690081,1,CENTRE ISLAND PK,10,Salix x sepulcralis,8
 15746,TO34482,151,FAIRVIEW AVE,04,Quercus alba,70
 15747,32969,6,KING GEORGE'S DR,05,Prunus serrulata,41
 15748,544580,15,MADRID ST,21,Gymnocladus dioicus,4
@@ -26270,7 +26270,7 @@ objectid,structid,address,streetname,ward,botanical_name,dbh_trunk
 26385,573157,18,BONNIE BRAE BLVD,14,Amelanchier canadensis,6
 26386,SC107500,18,MILLDOCK DR,25,Gleditsia triacanthos f. inermis 'Shademaster',49
 26387,378793,50,MARLBOROUGH AVE,11,Ulmus pumila,40
-26388,TO88938,601,None,None,Acer platanoides,45
+26388,TO88938,601,None,15,Acer platanoides,45
 26389,SC8457,57,BAYLAWN DR,22,Gleditsia triacanthos f. inermis 'Shademaster',49
 26390,511239,11,HAVELOCK ST,09,Morus alba,15
 26391,NY110997,41,COMAY RD,05,Morus,15
@@ -30943,7 +30943,7 @@ objectid,structid,address,streetname,ward,botanical_name,dbh_trunk
 31088,653437,44,SHEDIAC RD,21,Cercis canadensis,6
 31089,356986,533,MCROBERTS AVE,09,Morus alba,34
 31090,69062,15,RICHMOND ST E,13,Quercus,10
-31091,652765,431,MCCOWAN RD,21,alix Ã sepulcralis,95
+31091,652765,431,MCCOWAN RD,21,Salix x sepulcralis,95
 31092,105322,2,RHINESTONE DR,02,ginkgo biloba,5
 31093,TO27649,38,DUGGAN AVE,12,Acer platanoides 'Schwedleri',60
 31094,TO9877,1639,BLOOR ST W,04,Morus alba,16

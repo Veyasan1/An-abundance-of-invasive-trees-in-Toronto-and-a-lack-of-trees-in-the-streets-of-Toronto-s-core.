@@ -1,5 +1,5 @@
 #### Preamble ####
-# Purpose: Cleans the raw plane data recorded by two observers..... [...UPDATE THIS...]
+# Purpose: Cleans the raw Street Tree Data collected cumulatively by Urban Forestry
 # Author: Veyasan Ragulan
 # Date: 20 September 2024
 # Contact: veyasan.ragulan@mail.utoronto.ca
@@ -9,15 +9,20 @@
 
 #### Workspace setup ####
 library(tidyverse)
+library(dplyr)
 
 #### Clean data ####
 raw_data <- read_csv("data/raw_data/raw_data.csv")
 
 cleaned_data <-
   raw_data |>
-  janitor::clean_names() |>
-  select(objectid,structid,address,streetname,ward,botanical_name,dbh_trunk) |>
-  tidyr::drop_na()
+  filter(DBH_TRUNK > 0) |> # Remove non-positive diameter readings
+  mutate(BOTANICAL_NAME = replace(BOTANICAL_NAME, BOTANICAL_NAME == "alix Ã\u0097 sepulcralis", "Salix x sepulcralis")) |> # Fix the broken botanical name
+  mutate(WARD = replace(WARD, OBJECTID == 26388, "15")) |> # Give a tree with no ward allocation its correct ward allocation
+  janitor::clean_names() |> # match case on all variable_names
+  select(objectid,structid,address,streetname,ward,botanical_name,dbh_trunk) |> # Select ids, street location, ward location, species name, and trunk diameter for analysis
+  tidyr::drop_na() # Filter out any na values
 
 #### Save data ####
 write_csv(cleaned_data, "data/analysis_data/analysis_data.csv")
+
