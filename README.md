@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repo includes the paper *An abundance of invasive trees in Toronto anda lack of trees in the streets of Toronto’s core.*, as well as all code used to produce the paper. The paper looks at Toronto's street trees and discerns valuable insights and key trends from the species, locations, and conditions of said trees.
+This repo includes the paper *An abundance of invasive trees in Toronto and a lack of trees in the streets of Toronto’s core.*, as well as all code used to produce the paper. The paper looks at Toronto's street trees and discerns valuable insights and key trends from the species, locations, and conditions of said trees.
 
 
 ## File Structure
