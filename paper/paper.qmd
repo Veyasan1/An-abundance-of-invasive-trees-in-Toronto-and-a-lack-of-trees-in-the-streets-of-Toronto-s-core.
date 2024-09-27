@@ -31,7 +31,7 @@ Section 2 will outline the source of this data. Section 3 covers the graphs depi
 
 # Data {#sec-data}
 
-All collection and analysis of data was done using R, a free programming language designed for data scientists (@citeR). Additionally, tidycerse (@citeTidyverse), dplyr (@dplyr), and janitor (@citeJanitor) have been used as packages to read, clean, and present data. Finally OpenData Toronto is an online database containing thousands of datasets pertaining to the City of Toronto, which is where the data for this paper was initially accessed (@citeOpendatatoronto).
+All collection and analysis of data was done using R, a free programming language designed for data scientists (@citeR). Additionally, tidycerse (@citeTidyverse), dplyr (@citeDplyr), and janitor (@citeJanitor) have been used as packages to read, clean, and present data. Finally OpenData Toronto is an online database containing thousands of datasets pertaining to the City of Toronto, which is where the data for this paper was initially accessed (@citeOpendatatoronto).
 
  Rohan Alexander's book, *Telling Stories with Data* was referenced for troubleshooting and general ideas for data analysis (@tellingstories) 
 
@@ -51,7 +51,7 @@ analysis_data <- read_csv(here::here("data/analysis_data/analysis_data.csv"))
 ```
 
 ```{r}
-#| label: fig-topspecies
+#| label: fig-1
 #| fig-cap: Street tree count of 10 most popoulus tree species in Toronto up to September 2024
 #| echo: false
 #| warning: false
@@ -69,10 +69,10 @@ top_species_count |>
        y = NULL)
 ```
 
-The most populous species by far is the Acer platanoides, commonly known as the Norwegian Maple. It is interesting how much more prevalent it is compared to any of the other top 10 tree species, at over 3000 recorded individuals.
+Looking at @fig-1, the most populous species by far is the Acer platanoides, commonly known as the Norwegian Maple. It is interesting how much more prevalent it is compared to any of the other top 10 tree species, at over 3000 recorded individuals. Also note the similarity of the names Gleditsia triacanthos and Gleditsia triacanthos f. inermis 'Skyline'. The latter is an example of a hybrid tree, which is why it's botanical name contains the botanical name of another tree.
 
 ```{r}
-#| label: fig-ward
+#| label: fig-2
 #| fig-cap: Street tree count by Toronto wards up to September 2024
 #| echo: false
 #| warning: false
@@ -88,10 +88,30 @@ ward_count |>
   labs(x = "Ward",
        y = "Number of trees planted")
 ```
-Ward 2 takes the top spot for tree count, with Ward 3 trailing behind it. These wards are both in Toronto's west end, Etobicoke Centre, and Etobicoke- Lakeshore.Ward 13 and Ward 10 have the least amount of trees, being Spadina-Fort York and Toronto Centre.
+@fig-2 shows the count of trees over each ward in Toronto. Toronto has 25 wards, each with varying land sizes and populations. Ward 2 takes the top spot for tree count, with Ward 3 trailing behind it. These wards are both in Toronto's west end, Etobicoke Centre, and Etobicoke- Lakeshore. Ward 13 and Ward 10 have the least amount of trees, being Spadina-Fort York and Toronto Centre.
 
 ```{r}
-#| label: fig-trunk
+#| label: fig-3
+#| fig-cap: 10 most populous tree species in Ward 13 of Toronto, Ontario
+#| echo: false
+#| warning: false
+#| message: false
+
+ward13_species_count <- analysis_data %>%
+  filter(ward == "13") %>%
+  count(botanical_name, sort = TRUE) %>%
+  head(10)
+
+ward13_species_count |> 
+  ggplot(aes(y = botanical_name, x = n)) +
+  geom_col() +
+  theme_minimal() +
+  labs(x = "Planted Trees",
+       y = NULL)
+```
+
+```{r}
+#| label: fig-4
 #| fig-cap: Distribution of Distance-at-Breast-Height diameter of all trees in Toronto up to September 2024
 #| echo: false
 #| warning: false
@@ -101,19 +121,37 @@ analysis_data |>
   ggplot(aes(x = dbh_trunk)) +
   geom_histogram(binwidth = 10) +
   theme_minimal() +
-  labs(x = "DBH Diameter",
+  labs(x = "DBH Diameter (cm)",
        y = "Tree Count")
 ```
-The histogram has a very long tail to the left, indicating one or two trees having upwards of 815 cm of diameter.
+@fig-4 is a histogram of the frequency of certain tree-diameters across Toronto. The histogram has a very long tail to the left, indicating one or two trees having upwards of 815 cm of diameter.
+
+```{r}
+#| label: fig-5
+#| fig-cap: Distribution of Distance-at-Breast-Height diameter of trees in Toronto up to September 2024 (excluding trees with a recorded DBH of over 200)
+#| echo: false
+#| warning: false
+#| message: false
+
+filter200_data <- analysis_data %>%
+  filter(dbh_trunk <= 200)
+
+filter200_data |> 
+  ggplot(aes(x = dbh_trunk)) +
+  geom_histogram(binwidth = 10) +
+  theme_minimal() +
+  labs(x = "DBH Diameter (cm)",
+       y = "Tree Count")
+```
 
 # Discussion
 
 ## The worrying prominence of Acer platanoides
 
-Figure 1 shows that Acer platanoides, otherwise known as the Norway Maple, is clearly the most populous tree in the city of Toronto, beating out any of 9 other contenders by 200 individuals. Acer platanoides is a well known tree used in urban environments, especially after the demise of elm trees in the 1970s (@urbanforest). These trees are know for ‘a vigorous early growth rate, desirable form and size, the capacity to withstand many urban impacts (e.g. pavement, moderate levels of pollution, dusts, and dry soils) and the abilities to transplant well, grow on a wide variety of soils, and withstand ice and snow damage better than other maples’ (@norwaymaple). Being planted in cities, it's seeds can travel by wind across to more wooded suburbs, where the seeds can tolerate shade for extended periods of time (@urbanforest). However, as it's common name suggests, it is not a native species to Canada, instead brought here by European explorers and settlers. While not a very invasive species, taking over just 9% of Southern Ontario's forests, it does so by harming other native plants and trees (@urbanforests). More attention should be cast on the spread of this tree, as it has the potential to devastate Toronto's and Southern Ontario's forests in the years to come.
+@fig-1 shows that Acer platanoides, otherwise known as the Norway Maple, is clearly the most populous tree in the city of Toronto, beating out any of 9 other contenders by 200 individuals. Acer platanoides is a well known tree used in urban environments, especially after the demise of elm trees in the 1970s (@urbanforest). These trees are know for ‘a vigorous early growth rate, desirable form and size, the capacity to withstand many urban impacts (e.g. pavement, moderate levels of pollution, dusts, and dry soils) and the abilities to transplant well, grow on a wide variety of soils, and withstand ice and snow damage better than other maples’ (@norwaymaple). Being planted in cities, it's seeds can travel by wind across to more wooded suburbs, where the seeds can tolerate shade for extended periods of time (@urbanforest). However, as it's common name suggests, it is not a native species to Canada, instead brought here by European explorers and settlers. While not a very invasive species, taking over just 9% of Southern Ontario's forests, it does so by harming other native plants and trees (@urbanforests). More attention should be cast on the spread of this tree, as it has the potential to devastate Toronto's and Southern Ontario's forests in the years to come.
 
 ## The supposed lack of trees in downtown Toronto
-Figure 2 shows the distribution of trees across the 25 wards of Toronto. Wards 2 and 3 top the rankings, at over 2000 individuals. This isn't a surprise as those wards are located in Etobicoke Centre and Etobicoke-Lakeshore, consisting mainly of suburbs and small pockets of woodland. On the other hand, Wards 10 and 13, Spadina-Fort York, and Toronto Centre, display a shocking lack of trees, at 500 or less. These wards make up a majority of Toronto's downtown core, which would explain the lack of trees. However, this could be a call to invest in more roadside and path side greenery. Implementing more trees either along big avenues such as university, or small roads servicing townhouses and condos, can help liven up what is considered by many to be a dull, drab section of the city, with endless rows of concrete and glass interspersed with concrete and brick and little else.
+@fig-2 shows the distribution of trees across the 25 wards of Toronto. Wards 2 and 3 top the rankings, at over 2000 individuals. This isn't a surprise as those wards are located in Etobicoke Centre and Etobicoke-Lakeshore, consisting mainly of suburbs and small pockets of woodland. On the other hand, Wards 10 and 13, Spadina-Fort York, and Toronto Centre, display a shocking lack of trees, at 500 or less. These wards make up a majority of Toronto's downtown core, which would explain the lack of trees. However, this could be a call to invest in more roadside and path side greenery. Implementing more trees either along big avenues such as university, or small roads servicing townhouses and condos, can help liven up what is considered by many to be a dull, drab section of the city, with endless rows of concrete and glass interspersed with concrete and brick and little else.
 
 ## DBH diameters
 
@@ -127,6 +165,11 @@ Because of the scope of the data harvested, there may be some inacuraccies. For 
 
 \newpage
 
+# Appendix
+
+## Data Cleaning
+
+While cleaning that dataset, some inconsisten values were discovered. A particular species of tree, Salix x sepulcralis, had it's name misspelled in the dataset. This may have come from using special characters that could not be saved onto the dataset, resulting in a garbled name. An additional step was taken to restore the correct botanical name, using the common name as reference. Similarly, one observation did not have a ward location allocated. This was remedied by reading the globval coordinates from geometry, a varaible in the raw data file that shares the latitude and longtitude of the tree individual. Using these coordinates, and the address number, the general location for this tree was determined, along with its ward location. The ward entry for this observataion was updated accordingly.
 
 # References
 
