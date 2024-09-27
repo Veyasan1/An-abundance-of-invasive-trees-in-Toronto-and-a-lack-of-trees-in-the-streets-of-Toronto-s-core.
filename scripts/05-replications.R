@@ -21,6 +21,7 @@ top_species_count <- analysis_data %>%
   count(botanical_name, sort = TRUE) %>%
   head(10)
 
+# Gather top 10 tree species by count (LLM usage was used to troubleshoot this function)
 top_species_count |> 
   ggplot(aes(y = botanical_name, x = n)) +
   geom_col() +
@@ -33,6 +34,7 @@ ward_count <- analysis_data %>%
   count(ward, sort = TRUE) %>%
   head(10)
 
+# Gather counts of trees per ward
 ward_count |> 
   ggplot(aes(x = ward, y = n)) +
   geom_col() +

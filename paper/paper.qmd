@@ -55,6 +55,7 @@ analysis_data <- read_csv(here::here("data/analysis_data/analysis_data.csv"))
 #| warning: false
 #| message: false
 
+# Gather top 10 tree species by count (LLM usage was used to troubleshoot this function)
 top_species_count <- analysis_data %>%
   count(botanical_name, sort = TRUE) %>%
   head(10)
@@ -76,6 +77,7 @@ Looking at @fig-1, the most populous species by far is the Acer platanoides, com
 #| warning: false
 #| message: false
 
+# Gather counts of trees per ward
 ward_count <- analysis_data %>%
   count(ward, sort = TRUE)
 
