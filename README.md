@@ -2,18 +2,18 @@
 
 ## Overview
 
-This repo includes all reproducible code for Veyasan Ragulan's paper on Toronto's Street Trees
+This repo includes the paper *An abundance of invasive trees in Toronto anda lack of trees in the streets of Toronto’s core.*, as well as all code used to produce the paper. The paper looks at Toronto's street trees and discerns valuable insights and key trends from the species, locations, and conditions of said trees.
 
 
 ## File Structure
 
 The repo is structured as:
 
--   `data/raw_data` contains the raw data as obtained from X.
+-   `data/raw_data` contains the raw data as obtained from OpenData Toronto.
 -   `data/analysis_data` contains the cleaned dataset that was constructed.
--   `other` contains relevant literature, details about LLM chat interactions, and sketches.
+-   `other` details about LLM chat interactions, and sketches.
 -   `paper` contains the files used to generate the paper, including the Quarto document and reference bibliography file, as well as the PDF of the paper. 
--   `scripts` contains the R scripts used to simulate, download and clean data.
+-   `scripts` contains the R scripts used to simulate, download clean and test the data. Additionally, there is a file that contains the code used to generate the graphs used in the paper
 
 
 ## Statement on LLM usage
