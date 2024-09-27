@@ -31,7 +31,9 @@ Section 2 will outline the source of this data. Section 3 covers the graphs depi
 
 # Data {#sec-data}
 
-All collection and analysis of data was done using R, a free programming language designed for data scientists (@citeR). Additionally, tidycerse (@tidyverse), dplyr (@dplyr), and janitor (@janitor) have been used as packages to read, clean, and present data. Finally OpenData Toronto is an online database containing thousands of datasets pertaining to the City of Toronto, which is where the data for this paper was initially accessed.
+All collection and analysis of data was done using R, a free programming language designed for data scientists (@citeR). Additionally, tidycerse (@citeTidyverse), dplyr (@dplyr), and janitor (@citeJanitor) have been used as packages to read, clean, and present data. Finally OpenData Toronto is an online database containing thousands of datasets pertaining to the City of Toronto, which is where the data for this paper was initially accessed (@citeOpendatatoronto).
+
+ Rohan Alexander's book, *Telling Stories with Data* was referenced for troubleshooting and general ideas for data analysis (@tellingstories) 
 
 The data comes from Urban Forestry, an organization dedicated to Toronto's urban forests. They work towards planting more trees, and protecting existing trees from damage due to individuals, private entities, and public entities (@urbanforestry). This particular dataset is called Street Tree Data, and focuses on city-owned trees located on roads. This information would be most likely used by city planners and road maintenance, ensuring snow plows and street dusters don't impede on any trees that line the roads. It is important to note that there may be some privately owned trees listed among the municipal trees, as they may be of interest with regards to road maintenance or other city services.
 
